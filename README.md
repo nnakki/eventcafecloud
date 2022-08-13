@@ -33,13 +33,7 @@ AWS S3 Docker, EC2, RDS, ECR, Route53
 
 </br>
 
-## 4. 역할
-
-<details>
-<summary><b>유저 도메인 개발, 프로젝트 기획 및 노션 관리, 스크럼 담당 관리</b></summary>
-<div markdown="1">
-
-</details>
+## 4. 개발 담당 파트 및 기능 소개 
 
 <details>
 <summary><b>소셜 로그인 및 로그아웃 API</b></summary>
@@ -70,9 +64,41 @@ AWS S3 Docker, EC2, RDS, ECR, Route53
 </br>
 
 ## 5. 핵심 트러블 슈팅 
+
+### 5-1. Jwt토큰 사용 시, 토큰을 언제 쿠키에 심어줄 수 있는가?
+- 보안의 강화를 위해 소셜 로그인 시, Jwt토큰을 사용하여 사용자의 정보를 주고받을 수 있도록 개발했습니다.
+  
+- 대체적으로 쿠키에 토큰을 심는 일은 프론트에서 이루어집니다. 하지만 Thymeleaf를 사용한 저희 프로젝트의 특성상   
+  SSR방식으로 한번에 데이터가 전달이 되어 ajax 처럼 url을 통해 데이터를 주고 받지 않는 기능이 많아 url로 토큰을  
+  전달하는 방식에 어려움이 있었습니다. 
+  
+- 때문에 로그인 시, 해당 과정을 백엔드에서 처리할 수 있도록 코드를 수정했습니다. 
+  
+[🔗 SpringSecurity+JWT+OAuth2를 사용한 소셜로그인](https://velog.io/@nnakki/SpringSecurityJWTOAuth2를-사용한-소셜로그인)  
+
+</br>  
+  
+### 5-2. 페이징 시, 다대일 관계에서 지연로딩 이후 초기화가 안되는 문제
+[🔗 페이징 시, 다대일 관계에서 지연로딩 이후 초기화가 안되는 이유](https://velog.io/@nnakki/페이징시-다대일-관계에서-지연로딩-이후-초기화가-안되는-이유) 
+
+</br>  
+
+### 5-3. 프론트와 백의 역할 분리
+[🔗 Dto의 반환위치? Controller vs Service](https://velog.io/@nnakki/Dto의-반환위치-Controller-vs-Service)  
+
+</br>  
+
+ 
 </br>
 
 ## 6. 그 외 프로젝트를 진행하며 경험하고 체득한 내용
-</br>
+  
+#### [🔗 AOP를 사용한 코드 리팩토링 - 스프링 시큐리티 로그인 성능개선](https://velog.io/@nnakki/AOP를-사용한-코드-리팩토링-HandlerMethodArgumentResolver)  
+#### [🔗 JavaBean 패턴을 적용한 코드 리팩토링](https://velog.io/@nnakki/프로젝트-코드-리팩토링-적용-사례-effective-java)  
+#### [🔗 SpringBoot에서 테스트 코드를 작성하기](https://velog.io/@nnakki/SpringBoot에서-테스트코드를-작성하자)  
+#### [🔗 프로젝트 기획 및 관리, 협업 방법](https://velog.io/@nnakki/프로젝트-관리-과정)  
+#### [🔗 글로벌 예외처리 적용하기](https://velog.io/@nnakki/글로벌-예외처리-적용하기)  
 
-## 7. 회고
+</br>
+ 
+  
