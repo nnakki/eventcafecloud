@@ -34,10 +34,18 @@ AWS S3 Docker, EC2, RDS, ECR, Route53
 </br>
 
 ## 4. 개발 담당 파트 및 기능 소개 
+##### ( * 펼쳐보시면 상세 내용을 확인하실 수 있습니다. )
 
 <details>
 <summary><b>소셜 로그인 및 로그아웃 API</b></summary>
 <div markdown="1">
+
+![로그인](https://user-images.githubusercontent.com/93200574/185052178-770531f4-0ed5-4e4c-8c3f-1d6ac20853ec.gif)
+
+[application-oauth.yml🔗](https://github.com/nnakki/eventcafecloud/blob/2dea14bd587ac6b7a26268ed98c6c76556cd94b0/src/main/resources/application-oauth.yml)  
+[CustomOAuth2UserService🔗](https://github.com/nnakki/eventcafecloud/blob/2dea14bd587ac6b7a26268ed98c6c76556cd94b0/src/main/java/com/eventcafecloud/oauth/service/CustomOAuth2UserService.java)  
+[OAuth2AuthenticationSuccessHandler🔗](https://github.com/nnakki/eventcafecloud/blob/2dea14bd587ac6b7a26268ed98c6c76556cd94b0/src/main/java/com/eventcafecloud/oauth/handler/OAuth2AuthenticationSuccessHandler.java)  
+[CookieUtil🔗](https://github.com/nnakki/eventcafecloud/blob/2dea14bd587ac6b7a26268ed98c6c76556cd94b0/src/main/java/com/eventcafecloud/utils/CookieUtil.java)
 
 </details>
 
@@ -45,11 +53,19 @@ AWS S3 Docker, EC2, RDS, ECR, Route53
 <summary><b>프로필페이지 CRUD (프로필 수정, 내 북마크, 내 카페, 내 게시글 등) 및 페이징</b></summary>
 <div markdown="1">
 
+![프로필페이지](https://user-images.githubusercontent.com/93200574/185052202-eb1bcb0c-0afe-4971-bca0-69dd00d65d48.gif)
+
+[profileController🔗](https://github.com/nnakki/eventcafecloud/blob/develop/src/main/java/com/eventcafecloud/user/controller/ProfileController.java)
+
 </details>
 
 <details>
 <summary><b>카페관리페이지 CRUD (예약 내역 및 휴무일 조회 및 삭제) 및 페이징</b></summary>
 <div markdown="1">
+
+![카페관리](https://user-images.githubusercontent.com/93200574/185052231-dd817a1a-7eb2-4faf-a2fa-5e9b3836f7d8.gif)
+
+[hostProfileController🔗](https://github.com/nnakki/eventcafecloud/blob/2dea14bd587ac6b7a26268ed98c6c76556cd94b0/src/main/java/com/eventcafecloud/user/controller/hostProfileController.java)
 
 </details>
 
@@ -57,6 +73,10 @@ AWS S3 Docker, EC2, RDS, ECR, Route53
 <details>
 <summary><b>관리자페이지 CRUD, 페이징 및 필터, 스프링 메일인증 API</b></summary>
 <div markdown="1">
+
+![어드민페이지](https://user-images.githubusercontent.com/93200574/185052242-2b71839f-3941-4dee-b078-a26c1d4cf3a0.gif)
+
+[AdminController🔗](https://github.com/nnakki/eventcafecloud/blob/2dea14bd587ac6b7a26268ed98c6c76556cd94b0/src/main/java/com/eventcafecloud/user/controller/AdminController.java)
 
 </details>
 
