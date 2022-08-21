@@ -467,7 +467,6 @@ public boolean isEventCancleAvail(Long id) {
 ## 6. 그 외 프로젝트를 진행하며 경험하고 체득한 내용
   
 #### [🔗 AOP를 사용한 코드 리팩토링 - 스프링 시큐리티 로그인 성능개선](https://velog.io/@nnakki/AOP를-사용한-코드-리팩토링-HandlerMethodArgumentResolver)  
-#### [🔗 JavaBean 패턴을 적용한 코드 리팩토링](https://velog.io/@nnakki/프로젝트-코드-리팩토링-적용-사례-effective-java)  
 #### [🔗 프로젝트 기획 및 관리, 협업 방법](https://velog.io/@nnakki/프로젝트-관리-과정)  
 #### [🔗 글로벌 예외처리 적용하기](https://velog.io/@nnakki/글로벌-예외처리-적용하기) 
 #### [🔗Dto의 반환위치? Controller vs Service](https://velog.io/@nnakki/Dto의-반환위치-Controller-vs-Service)  
