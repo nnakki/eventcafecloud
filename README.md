@@ -36,7 +36,6 @@ AWS S3 Docker, EC2, RDS, ECR, Route53
 ## 4. 개발 담당 파트 및 주요 기능 소개 
 ##### ( * 펼쳐보시면 상세 내용을 확인하실 수 있습니다. )
 
-![로그인](https://user-images.githubusercontent.com/93200574/185052178-770531f4-0ed5-4e4c-8c3f-1d6ac20853ec.gif)
 ### 소셜 로그인 및 로그아웃 API
 
 <details>
@@ -87,12 +86,7 @@ SpringSecurity의 filter가 Header 토큰을 인식, JWT Token을 인증해줄 �
 
 </br>  
 
-</details>
-</br>  
 
-
-![프로필페이지](https://user-images.githubusercontent.com/93200574/185052202-eb1bcb0c-0afe-4971-bca0-69dd00d65d48.gif)
-![카페관리](https://user-images.githubusercontent.com/93200574/185052231-dd817a1a-7eb2-4faf-a2fa-5e9b3836f7d8.gif)
 
 ### 프로필페이지 CRUD (프로필 수정, 내 북마크, 내 카페, 내 게시글, 카페 및 예약내역 관리 등) 및 페이징</b></summary>
 
@@ -228,10 +222,7 @@ $.datepicker.setDefaults({
 </div>
 </details>
 
- 
 </br> 
-
-![어드민페이지](https://user-images.githubusercontent.com/93200574/185052242-2b71839f-3941-4dee-b078-a26c1d4cf3a0.gif)
 
 ### 관리자페이지 CRUD, 페이징 및 필터, 스프링 메일인증 API
 
