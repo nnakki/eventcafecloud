@@ -448,14 +448,124 @@ public boolean isEventCancleAvail(Long id) {
 </div>
 </details>
 
-
-
 </br>  
 
+
+## 6. 그 외 트러블 슈팅
+
+<details>
+<summary>static의 정적 파일들이 불러와지지 않는 오류</summary>
+<div markdown="1">       
+
+![image](https://user-images.githubusercontent.com/93200574/186046948-33de02b3-33e7-4018-ac71-e0a9764612d3.png)
+
+- `its MIME type {''} is not a supported stylesheet MIME type..` 구문을 보고, 경로의 문제인가 했지만  
+`401코드`를 발견하고 인증에러임을 깨달았습니다.
+- `SpringSecurity`에서 static파일에 관한 접근 권한들을 설정하지 않아서 생긴 오류여서 `.andMatcher` 경로를 열고 `.permitAll()`을 설정하여 해결했습니다. 
+</br>
+</div>
+</details>
+
+<details>
+<summary>thymeleaf 사용 시, th:field / th:value 가 함께 사용되지 않는 문제</summary>
+<div markdown="1">       
+
+- th:field를 사용하면 th:value의 값은 무시된다. th:value를 넘기고 싶다면, th:field를 쓰지 않고 id="", name=""의 형태로 사용
+
+</br>
+</div>
+</details>
  
+<details>
+<summary>OneToOne 매핑을 잘못 이해하고 사용했던 문제, (DB 접근을 줄여 성능개선)</summary>
+<div markdown="1">
+
+- Host가입 여부에 따라 유저의 권한을 바꿔주는 코드를 작성할 때, HostUser Entity와 User Entity가 OneToOne 매핑관계가 맺어져있음에도, 각각의 Repository에서 각각을 불러내는 비효율적인 코드를 작성했었습니다. 
+```JAVA
+ @Transactional
+    public void approveIsPass(Long id) {
+        HostUser hostUser = hostUserRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND.getMessage()));
+        hostUser.updateApprove(ApproveType.PASS);
+
+        User user = userRepository.findById(hostUser.getId())
+                .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND.getMessage()));
+        user.updateRole(RoleType.HOST);
+    }
+```
+- 원래의 코드는 각각의 Repository에서 user와 HostUser를 불러내어 user에서는 권한을 바꿔주고, hostUser에서는 권한상태를(승인,대기) 바꿔주었는데
+이 또한 무슨 작업인지 구분이 명확하지 않았기 때문에, 두 작업을 합쳐준 연관관계 메소드를 만들어주는 형태로 아래와 같이 변경했습니다.
+```java
+@Transactional
+public void approveIsPass(Long id) {
+    User user = userRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException(USER_NOT_FOUND.getMessage()));
+    user.updateNormalUserToHostUser(user);
+}
+```
+</br>
+</div>
+</details>
+
+<details>
+<summary>유저의 권한을 변경하고 재로그인을 해도, SpringSecurity가 적용이 안되던 문제, (@Secured("ADMIN"))이 적용X</summary>
+<div markdown="1">       
+
+- 소셜로그인을 다시 할 때마다, Principal에서 권한이 NORMAL로 자동 세팅되도록 되어있던 코드 때문이었음. 코드를 수정하여 해결
+![image](https://user-images.githubusercontent.com/93200574/186050788-383d2304-a3e0-40fd-8bae-c4f3017b622b.png)
+
+</br>
+</div>
+</details>
+
+<details>
+<summary>Attribute "value" is required in "option" tags</summary>
+<div markdown="1">
+
+```html
+<select th:field="*{role}" class="custom-select" id="userRole">
+  <option th:selected>권한을 선택해주세요</option>
+  <option th:value="ROLE_NORMAL">일반회원</option>
+  <option th:value="ROLE_ADMIN">관리자</option>
+</select>
+```
+
+- 타임리프에서 값을 전달하기 위해 select option을 사용했는데 template parsing 에러가 발생 
+- th:selected 부분에도 value에 해당하는 값이 들어가야 했었음. 필요없는 사항이어서 th:value 코드만 남김
+
+</br>
+</div>
+</details>
+
+<details>
+<summary>TOKEN의 만료시간과 Cookie의 만료시간이 상이하여 로그인이 자꾸 풀리던 문제 </summary>
+<div markdown="1">
+
+- JWT TOKEN과 Cookie의 만료시간을 동일하게 1800000으로 설정해놓았으나 서로 인식을 다르게 한다는 걸 깨달았습니다.
+- 실험 결과, JWT TOKEN에서는 Exipry를 저장할 때 DATE함수를 사용하면서 `밀리세컨`으로 인식하는데, Cookie에서는 같은 숫자를 `세컨`으로 인식함을 깨달았고,  
+단위를 맞추기 위해 1000을 나누어서 시간을 동일하게 설정함으로써 해결했습니다. 
+
+</br>
+</div>
+</details>
+
+<details>
+<summary>S3에서 받아온 URL로 객체 생성후 DB에 저장이 안되는 오류</summary>
+<div markdown="1">
+
+- s3에서 받아온 URL로 객체는 생성이 되었지만, Image가 DB에 저장이 되지 않았습니다. 
+- eventImage를 event의 하위 엔티티 처리하는 cascade 을 달아주지 않아서 생긴 문제로, `cascade = CascadeType.ALL`을 붙여 해결했습니다. 
+```java
+@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+private List eventImages = new ArrayList<>();
+```
+</br>
+</div>
+</details>
+
 </br>
 
-## 6. 그 외 프로젝트를 진행하며 경험하고 체득한 내용
+## 7. 그 외 프로젝트를 진행하며 경험하고 체득한 내용
   
 #### [🔗 AOP를 사용한 코드 리팩토링 - 스프링 시큐리티 로그인 성능개선](https://velog.io/@nnakki/AOP를-사용한-코드-리팩토링-HandlerMethodArgumentResolver)  
 #### [🔗 프로젝트 기획 및 관리, 협업 방법](https://velog.io/@nnakki/프로젝트-관리-과정)  
